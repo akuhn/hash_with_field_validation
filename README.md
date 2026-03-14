@@ -1,6 +1,6 @@
-# Hamachi
+# HashWithFieldValidation
 
-Hamachi is a Ruby library designed to simplify the creation and manipulation of domain-specific data models, supporting type checking, data validation, and JSON deserialization. This library takes advantage of Ruby's dynamic nature, providing a fluent and intuitive interface to define domain models.
+HashWithFieldValidation is a Ruby library designed to simplify the creation and manipulation of domain-specific data models, supporting type checking, data validation, and JSON deserialization. This library takes advantage of Ruby's dynamic nature, providing a fluent and intuitive interface to define domain models.
 
 ## Features
 
@@ -16,7 +16,7 @@ Hamachi is a Ruby library designed to simplify the creation and manipulation of 
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'hamachi'
+gem 'hash_with_field_validation'
 ```
 
 And then execute:
@@ -25,16 +25,16 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install hamachi
+    $ gem install hash_with_field_validation
 
 ## Usage
 
 Here is a basic usage example:
 
 ```ruby
-require 'hamachi'
+require 'hash_with_field_validation'
 
-class User < Hamachi::Model
+class User < HashWithFieldValidation::Model
   field :name, type: String
   field :age, type: 1..100
 end
@@ -59,14 +59,14 @@ You can define the following types of fields:
 More complex nested models can be created:
 
 ```ruby
-class Post < Hamachi::Model
+class Post < HashWithFieldValidation::Model
   field :title, type: String
   field :content, type: String
   field :created_at, type: Timestamp
   field :tags, type: list(String)
 end
 
-class User < Hamachi::Model
+class User < HashWithFieldValidation::Model
   field :name, type: String
   field :friends, type: list(User)
   field :posts, type: list(Post)
@@ -133,8 +133,4 @@ Hackety hacking, frens!
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at [link to GitHub repo](https://github.com/akuhn/hamachi).  This project encourages collaboration and appreciates contributions. Feel free to contribute to the project by reporting bugs or submitting pull requests.
-
-## License
-
-The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
+Bug reports and pull requests are welcome on GitHub at [link to GitHub repo](https://github.com/akuhn/hash_with_field_validation).  This project encourages collaboration and appreciates contributions. Feel free to contribute to the project by reporting bugs or submitting pull requests.

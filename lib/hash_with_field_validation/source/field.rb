@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 
-module Hamachi
+module HashWithFieldValidation
 
   class Field
     def initialize(type)

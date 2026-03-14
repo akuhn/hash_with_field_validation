@@ -1,11 +1,11 @@
 
 
 
-describe Hamachi::Field do
+describe HashWithFieldValidation::Field do
 
   describe 'with String field' do
 
-    let(:field) { Hamachi::Field.new String }
+    let(:field) { HashWithFieldValidation::Field.new String }
 
     it { expect(field === 'example').to be true }
     it { expect(field === :example).to be_falsy }
@@ -19,7 +19,7 @@ describe Hamachi::Field do
 
   describe 'with Symbol field' do
 
-    let(:field) { Hamachi::Field.new Symbol }
+    let(:field) { HashWithFieldValidation::Field.new Symbol }
 
     it { expect(field === 'example').to be_falsy }
     it { expect(field === :example).to be true }

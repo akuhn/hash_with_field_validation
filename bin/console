@@ -5,9 +5,8 @@ require 'bundler/setup'
 
 require 'pry'
 
-require 'hamachi/model'
-require 'hamachi/ext'
+require 'hash_with_field_validation/model'
+require 'hash_with_field_validation/ext'
 
 # Start the console session
 binding.pry
-

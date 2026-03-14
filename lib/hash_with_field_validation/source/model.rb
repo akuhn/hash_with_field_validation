@@ -3,7 +3,7 @@
 require 'json'
 
 
-module Hamachi
+module HashWithFieldValidation
   class Model < Hash
 
     # ------- schema declaration ---------------------------------------
@@ -41,7 +41,7 @@ module Hamachi
     end
 
     def self.schema(&block) # for anonymous inline models
-      Class.new Hamachi::Model, &block
+      Class.new HashWithFieldValidation::Model, &block
     end
 
     def self.to_s

@@ -5,7 +5,7 @@
 # a concise and expressive manner.
 
 
-module Hamachi
+module HashWithFieldValidation
   module EnumerableExt
     def index_by
       raise unless block_given?

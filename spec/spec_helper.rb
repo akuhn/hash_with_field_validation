@@ -16,5 +16,4 @@ if ENV['SIMPLECOV']
   SimpleCov.start
 end
 
-require "hamachi"
-
+require "hash_with_field_validation"

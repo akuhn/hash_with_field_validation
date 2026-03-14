@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module Hamachi
+module HashWithFieldValidation
   VERSION = "0.3.2-beta"
 end
 
@@ -10,6 +10,7 @@ __END__
 # Minor version bump when backward-compatible changes or enhancements
 # Patch version bump when backward-compatible bug fixes, security updates etc
 
+- Renamed to hash_with_field_validation
 
 0.3.2
 
