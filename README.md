@@ -34,7 +34,7 @@ Here is a basic usage example:
 ```ruby
 require 'hash_with_field_validation'
 
-class User < HashWithFieldValidation::Model
+class User < HashWithFieldValidation
   field :name, type: String
   field :age, type: 1..100
 end
@@ -59,14 +59,14 @@ You can define the following types of fields:
 More complex nested models can be created:
 
 ```ruby
-class Post < HashWithFieldValidation::Model
+class Post < HashWithFieldValidation
   field :title, type: String
   field :content, type: String
   field :created_at, type: Timestamp
   field :tags, type: list(String)
 end
 
-class User < HashWithFieldValidation::Model
+class User < HashWithFieldValidation
   field :name, type: String
   field :friends, type: list(User)
   field :posts, type: list(Post)

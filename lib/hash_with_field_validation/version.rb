@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module HashWithFieldValidation
+class HashWithFieldValidation < Hash
   VERSION = "0.3.2-beta"
 end
 
@@ -11,6 +11,7 @@ __END__
 # Patch version bump when backward-compatible bug fixes, security updates etc
 
 - Renamed to hash_with_field_validation
+- Make the former model class the top-level element
 
 0.3.2
 

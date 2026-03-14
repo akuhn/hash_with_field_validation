@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 
-module HashWithFieldValidation
+class HashWithFieldValidation < Hash
 
   class Field
     def initialize(type)

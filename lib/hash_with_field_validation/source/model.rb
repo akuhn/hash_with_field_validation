@@ -3,8 +3,8 @@
 require 'json'
 
 
-module HashWithFieldValidation
-  class Model < Hash
+begin
+  class HashWithFieldValidation < Hash
 
     # ------- schema declaration ---------------------------------------
 
@@ -41,7 +41,7 @@ module HashWithFieldValidation
     end
 
     def self.schema(&block) # for anonymous inline models
-      Class.new HashWithFieldValidation::Model, &block
+      Class.new HashWithFieldValidation, &block
     end
 
     def self.to_s

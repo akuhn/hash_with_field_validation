@@ -5,7 +5,7 @@
 # a concise and expressive manner.
 
 
-module HashWithFieldValidation
+class HashWithFieldValidation < Hash
   module EnumerableExt
     def index_by
       raise unless block_given?

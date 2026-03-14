@@ -1,10 +1,10 @@
 require 'json'
 
 
-describe HashWithFieldValidation::Model do
+describe HashWithFieldValidation do
 
   let(:model) {
-    HashWithFieldValidation::Model.schema do
+    HashWithFieldValidation.schema do
       field %{name}, type: String
       field %{gender}, type: enum(:male, :female)
       field %{age}, type: 1..100
@@ -42,7 +42,7 @@ describe HashWithFieldValidation::Model do
 
     it 'raises an error when reader method already defined' do
       expect {
-        HashWithFieldValidation::Model.schema do
+        HashWithFieldValidation.schema do
           attr_reader :foo
           field :foo, type: Object
         end
@@ -51,7 +51,7 @@ describe HashWithFieldValidation::Model do
 
     it 'raises an error when writer method already defined' do
       expect {
-        HashWithFieldValidation::Model.schema do
+        HashWithFieldValidation.schema do
           attr_writer :foo
           field :foo, type: Object
         end
@@ -194,7 +194,7 @@ describe HashWithFieldValidation::Model do
     end
 
     it 'accepts JSON string as value for symbol field' do
-      model = HashWithFieldValidation::Model.schema do
+      model = HashWithFieldValidation.schema do
         field :example, type: Symbol
       end
 
@@ -203,7 +203,7 @@ describe HashWithFieldValidation::Model do
     end
 
     it 'accepts JSON string as value for enum field' do
-      model = HashWithFieldValidation::Model.schema do
+      model = HashWithFieldValidation.schema do
         field :example, type: enum(:foo, :bar)
       end
 
@@ -242,7 +242,7 @@ describe HashWithFieldValidation::Model do
   describe 'when field is a list' do
 
     let(:model) {
-      HashWithFieldValidation::Model.schema do
+      HashWithFieldValidation.schema do
         field %{sequence}, type: (list Integer)
       end
     }
@@ -270,7 +270,7 @@ describe HashWithFieldValidation::Model do
     end
 
     it 'should raise error when empty list is passed to non-empty field' do
-      model = HashWithFieldValidation::Model.schema do
+      model = HashWithFieldValidation.schema do
         field %{sequence}, type: (list Integer), empty: false
       end
       expect {
@@ -299,7 +299,7 @@ describe HashWithFieldValidation::Model do
 
     let(:model) {
       odd_number = matcher.new(Integer)
-      HashWithFieldValidation::Model.schema { field %{num}, type: odd_number }
+      HashWithFieldValidation.schema { field %{num}, type: odd_number }
     }
 
     it 'initializes value' do
@@ -351,7 +351,7 @@ describe HashWithFieldValidation::Model do
 
     it 'supports nested matchers' do
       odd_number = matcher.new(Numeric)
-      model = HashWithFieldValidation::Model.schema { field %{seq}, type: (list odd_number) }
+      model = HashWithFieldValidation.schema { field %{seq}, type: (list odd_number) }
       expect { model.new(seq: [3,5,7]) }.to_not raise_error
       expect { model.new(seq: [1,2,3]) }.to raise_error(/expected .* list\(odd number\)/)
     end
@@ -360,7 +360,7 @@ describe HashWithFieldValidation::Model do
   describe 'when fields are models (complex data structure)' do
 
     let(:model) {
-      HashWithFieldValidation::Model.schema do
+      HashWithFieldValidation.schema do
         field %{name}, type: String
         field %{address}, type: (schema {
           field %{street}, type: String
@@ -395,14 +395,14 @@ describe HashWithFieldValidation::Model do
 
     it 'should read has-one model field from snapshot' do
       m = model.parse annas_order
-      expect(m.address).to be_a HashWithFieldValidation::Model
+      expect(m.address).to be_a HashWithFieldValidation
       expect(m.address.street).to eq '834 Oak Street'
       expect(m.address.city).to eq 'Roseville'
     end
 
     it 'should read has-many model field from snapshot' do
       m = model.parse annas_order
-      expect(m.items).to all be_a HashWithFieldValidation::Model
+      expect(m.items).to all be_a HashWithFieldValidation
       expect(m.items.length).to eq 3
       expect(m.items.sum(&:price)).to eq 82.98 if RUBY_VERSION > '2.0.0'
     end
@@ -421,7 +421,7 @@ describe HashWithFieldValidation::Model do
     it 'constructor should accept nested hashes' do
       annas_order_as_hash = JSON.parse annas_order, symbolize_names: true
       m = model.new annas_order_as_hash
-      expect(m.address).to be_a HashWithFieldValidation::Model
+      expect(m.address).to be_a HashWithFieldValidation
       expect(m.address.street).to eq '834 Oak Street'
       expect(m.address.city).to eq 'Roseville'
     end
@@ -430,7 +430,7 @@ describe HashWithFieldValidation::Model do
   describe 'with nullable field' do
 
     let(:model) {
-      HashWithFieldValidation::Model.schema do
+      HashWithFieldValidation.schema do
         field :nickname, type: (nullable String)
       end
     }
