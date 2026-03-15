@@ -5,8 +5,8 @@ require 'bundler/setup'
 
 require 'pry'
 
+require 'hash_with_field_validation'
 require 'hash_with_field_validation/model'
-require 'hash_with_field_validation/ext'
 
 # Start the console session
 binding.pry

@@ -230,6 +230,11 @@ describe HashWithFieldValidation do
         model.from_snapshot snapshot
       }.to raise_error 'expected name to be String, got nil'
     end
+
+    it 'returns snapshot when snapshot is not a hash' do
+      snapshot = [:name, 'Anna']
+      expect(model.from_snapshot(snapshot)).to eq snapshot
+    end
   end
 
   describe 'JSON.dump' do
@@ -257,6 +262,13 @@ describe HashWithFieldValidation do
       expect(m.sequence).to eq []
     end
 
+    it 'should raise error when non-array value is set' do
+      m = model.new({})
+      expect {
+        m.sequence = 7
+      }.to raise_error(/expected .* list/)
+    end
+
     it 'should use default value when missing from snapshot' do
       m = model.from_snapshot(JSON.parse '{}')
       expect(m.sequence).to eq []
@@ -269,13 +281,24 @@ describe HashWithFieldValidation do
       }.to raise_error(/expected .* list/)
     end
 
-    it 'should raise error when empty list is passed to non-empty field' do
-      model = HashWithFieldValidation.schema do
-        field %{sequence}, type: (list Integer), empty: false
+    describe 'and non-empty' do
+
+      let(:model) {
+        HashWithFieldValidation.schema do
+          field %{sequence}, type: (list Integer), empty: false
+        end
+      }
+
+      it 'should raise error when empty list is passed' do
+        expect {
+          model.new(sequence: [])
+        }.to raise_error(/expected .* to be .* empty: false/)
       end
-      expect {
-        model.new(sequence: [])
-      }.to raise_error(/expected .* to be .* empty: false/)
+
+      it 'should accept non-empty list' do
+        m = model.new(sequence: [4,7,3])
+        expect(m.sequence).to eq [4,7,3]
+      end
     end
   end
 
@@ -404,7 +427,7 @@ describe HashWithFieldValidation do
       m = model.parse annas_order
       expect(m.items).to all be_a HashWithFieldValidation
       expect(m.items.length).to eq 3
-      expect(m.items.sum(&:price)).to eq 82.98 if RUBY_VERSION > '2.0.0'
+      expect(m.items.sum(&:price)).to eq 82.98
     end
 
     it 'should serialize-and-back using JSON format' do
@@ -461,4 +484,3 @@ describe HashWithFieldValidation do
     expect(HashWithFieldValidation::VERSION).not_to be nil
   end
 end
-

@@ -28,6 +28,7 @@ describe HashWithFieldValidation::Field do
 
     it { expect(field.to_s).to eq 'Symbol' }
     it { expect(field.from_snapshot 'example').to eq :example }
+    it { expect(field.from_snapshot nil).to be_nil }
     it { expect(field.default_value).to be_nil }
   end
 end

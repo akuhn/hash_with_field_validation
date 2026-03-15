@@ -11,9 +11,9 @@ RSpec.configure do |config|
   config.example_status_persistence_file_path = ".rspec_status"
 end
 
-if ENV['SIMPLECOV']
+if ENV['COVERAGE']
   require 'simplecov'
-  SimpleCov.start
+  SimpleCov.start { enable_coverage :branch }
 end
 
 require "hash_with_field_validation"
