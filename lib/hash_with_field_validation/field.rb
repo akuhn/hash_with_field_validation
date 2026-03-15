@@ -72,7 +72,8 @@ class HashWithFieldValidation < Hash
     end
 
     def from_snapshot(data, options)
-      data && data.map { |each| super(each, options) }
+      return data unless Array === data
+      data.map { |each| super(each, options) }
     end
   end
 

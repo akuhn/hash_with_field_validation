@@ -262,6 +262,12 @@ describe HashWithFieldValidation do
       expect(m.sequence).to eq []
     end
 
+    it 'should choke when initialized with non-array snapshot' do
+      expect {
+        model.new(sequence: 314)
+      }.to raise_error(/expected .* list.* got 314/)
+    end
+
     it 'should raise error when non-array value is set' do
       m = model.new({})
       expect {
