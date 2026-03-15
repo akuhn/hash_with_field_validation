@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class HashWithFieldValidation < Hash
-  VERSION = "0.3.2-beta"
+  VERSION = "1.0.0"
 end
 
 __END__
@@ -10,14 +10,13 @@ __END__
 # Minor version bump when backward-compatible changes or enhancements
 # Patch version bump when backward-compatible bug fixes, security updates etc
 
+1.0.0
+
 - Renamed to hash_with_field_validation
 - Make the former model class the top-level element
-
-0.3.2
-
+- Removed enumerable extensions, see another gem
 - New function Model#error_messages
 - Reorganize tests and write more tests
-- ...
 
 0.3.1
 

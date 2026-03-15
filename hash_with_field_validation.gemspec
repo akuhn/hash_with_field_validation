@@ -21,11 +21,8 @@ Gem::Specification.new do |spec|
   spec.require_paths = ["lib"]
   spec.files = %w{
     README.md
-    lib/hash_with_field_validation/ext.rb
+    lib/hash_with_field_validation/field.rb
     lib/hash_with_field_validation/model.rb
-    lib/hash_with_field_validation/source/enumerable_ext.rb
-    lib/hash_with_field_validation/source/field.rb
-    lib/hash_with_field_validation/source/model.rb
     lib/hash_with_field_validation/version.rb
     lib/hash_with_field_validation.rb
   }
